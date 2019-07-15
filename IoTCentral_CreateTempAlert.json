@@ -1,0 +1,152 @@
+{
+    "$connections": {
+        "value": {
+            "iotcentral": {
+                "connectionId": "/subscriptions/xxxxx/resourceGroups/bdl_iot/providers/Microsoft.Web/connections/iotcentral-1",
+                "connectionName": "iotcentral-1",
+                "id": "/subscriptions/xxxxx/providers/Microsoft.Web/locations/westeurope/managedApis/iotcentral"
+            },
+            "sap": {
+                "connectionId": "/subscriptions/37d02782-ca89-46c0-abac-ef2c0ae81726/resourceGroups/bdl_iot/providers/Microsoft.Web/connections/sap-1",
+                "connectionName": "sap-1",
+                "id": "/subscriptions/37d02782-ca89-46c0-abac-ef2c0ae81726/providers/Microsoft.Web/locations/westeurope/managedApis/sap"
+            }
+        }
+    },
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "ComposeJSON": {
+                "inputs": "@json(xml(body('Send_message_to_SAP')))",
+                "runAfter": {
+                    "Send_message_to_SAP": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Compose"
+            },
+            "ComposeXML": {
+                "inputs": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Z_IOTALERT_CREATE_PRIO xmlns=\"http://Microsoft.LobServices.Sap/2007/03/Rfc/\">\n\t<SENSOR>@{triggerBody()['device']['name']}</SENSOR>\n\t<PRIORITY>HI</PRIORITY>\n\t<VALUE>@{triggerBody()?['device']?['measurements']?['telemetry']?['temp']}</VALUE>\n</Z_IOTALERT_CREATE_PRIO>",
+                "runAfter": {},
+                "type": "Compose"
+            },
+            "Parse_JSON": {
+                "inputs": {
+                    "content": "@outputs('ComposeJSON')",
+                    "schema": {
+                        "properties": {
+                            "Z_IOTALERT_CREATE_PRIOResponse": {
+                                "properties": {
+                                    "@@xmlns": {
+                                        "type": "string"
+                                    },
+                                    "RET_ALERTID": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "runAfter": {
+                    "ComposeJSON": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ParseJson"
+            },
+            "Run_a_command": {
+                "inputs": {
+                    "body": {
+                        "displayedValue": "Alert Rule  @{triggerBody()['rule']['name']} triggered"
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['iotcentral']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/applications/@{encodeURIComponent('f4f497b5-269e-4e32-b47e-9dfdbe26fac4')}/devices/@{encodeURIComponent(triggerBody()?['device']?['id'])}/commands/@{encodeURIComponent('echo')}",
+                    "queries": {
+                        "deviceTemplateDisplayId": "ZTZlN2FmOGUtMjNiMi00YWM0LWE1N2YtM2MxZTVmZDUwZDg4LzEuMC4w"
+                    }
+                },
+                "runAfter": {},
+                "type": "ApiConnection"
+            },
+            "Run_a_command_2": {
+                "inputs": {
+                    "body": {
+                        "displayedValue": "Alert : @{body('Parse_JSON')?['Z_IOTALERT_CREATE_PRIOResponse']?['RET_ALERTID']}"
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['iotcentral']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/applications/@{encodeURIComponent('f4f497b5-269e-4e32-b47e-9dfdbe26fac4')}/devices/@{encodeURIComponent(triggerBody()?['device']?['id'])}/commands/@{encodeURIComponent('echo')}",
+                    "queries": {
+                        "deviceTemplateDisplayId": "ZTZlN2FmOGUtMjNiMi00YWM0LWE1N2YtM2MxZTVmZDUwZDg4LzEuMC4w"
+                    }
+                },
+                "runAfter": {
+                    "Parse_JSON": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection"
+            },
+            "Send_message_to_SAP": {
+                "inputs": {
+                    "body": "@outputs('ComposeXML')",
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['sap']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/Send",
+                    "queries": {
+                        "sapAction": "http://Microsoft.LobServices.Sap/2007/03/Rfc/Z_IOTALERT_CREATE_PRIO"
+                    }
+                },
+                "runAfter": {
+                    "ComposeXML": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "When_a_rule_is_fired": {
+                "inputs": {
+                    "body": {
+                        "ruleId": "87b31c7c-3d20-4af1-b545-6c7ed5261a38",
+                        "type": "flow",
+                        "url": "@{listCallbackUrl()}",
+                        "workflow": "@workflow()"
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['iotcentral']['connectionId']"
+                        }
+                    },
+                    "path": "/applications/@{encodeURIComponent('f4f497b5-269e-4e32-b47e-9dfdbe26fac4')}/actions/"
+                },
+                "type": "ApiConnectionWebhook"
+            }
+        }
+    }
+}
