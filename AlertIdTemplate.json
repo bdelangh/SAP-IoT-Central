@@ -1,0 +1,16 @@
+{
+    "properties": {
+        "Z_IOTALERT_CREATE_PRIOResponse": {
+            "properties": {
+                "@@xmlns": {
+                    "type": "string"
+                },
+                "RET_ALERTID": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "type": "object"
+}
