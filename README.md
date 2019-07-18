@@ -19,9 +19,9 @@ To connect the IoT Device to your newly created IoT Central, please follow [Conn
 
 Check if the measurements are coming in and check if you can use the echo command. This command will be used by the Logic App to display the AlertId.
 
-Now it's time to setup the Telemetry Rule. This is done in the Device Template of the mxChip (MXChipTemplate). You can configure a telemetry rule, using a condition like max(temperature) > 20°C. (Or other suitable value :) ).
+Now it's time to setup the Telemetry Rule. This is done in the Device Template of the mxChip (MXChipTemplate). You can configure a telemetry rule using a condition like max(temperature) > 20°C (or other suitable value :) ).
 
-You then need create the Logic App itself. This is done in the azure portal. 
+You then need to create the Logic App itself. This is done in the azure portal. 
 The trigger step of the Logic App should be a 'When a rule fired' from Azure IoT Central. In the configuration screen of this trigger, you create the link with your IoTCentral Application and telemetry rule. The Logic App will now also show up in the telemetry rule.
 
 ![](LogicApp_fired.PNG "Logic App Trigger")
