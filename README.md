@@ -6,7 +6,7 @@ The scenario looks as follows :
 1. IoT Device sends temperature data to IoT Central.
 2. IoT Central monitors the temperature via a Rule.
 3. If the rule is triggered, eg. max Temperature > 20°C then a Logic App is started.
-4. The Logic App uses the SAP Adapter to call a RFC which create an alert.
+4. The Logic App uses the SAP Adapter to call a RFC which creates an alert in the SAP System.
 5. For fun the logic app sends a message to the IoT device containing the alert nr.
 
 As IoT device I used the MXChip from the Microsoft Azure IoT Starter kit. 
@@ -17,11 +17,13 @@ The first step is to create an IoT Central Application. Since we want to use a L
 
 To connect the IoT Device to your newly created IoT Central, please follow [Connect an MXChip IoT DevKit device to your Azure IoT Central application](https://docs.microsoft.com/en-us/azure/iot-central/howto-connect-devkit) .
 
-Check if the measurements are coming in and check if you can use the echo command. This command will be used by the Logic App to display the AlertId.
+Verify if the measurements are coming in and if you can use the echo command. This command will be used by the Logic App to display the AlertId.
 
-Now it's time to setup the Telemetry Rule. This is done in the Device Template of the mxChip (MXChipTemplate). You can configure a telemetry rule using a condition like max(temperature) > 20°C (or other suitable value :) ).
+Now it's time to setup the Telemetry Rule. This is done in the Rules section of the Device Template of the MXChip (MXChipTemplate). You can configure a telemetry rule using a condition like max(temperature) > 20°C (or other suitable value :).
 
-You then need to create the Logic App itself. This is done in the azure portal. 
+![](telemetryRule.PNG "Telemetry Rule")
+
+You then need to create the Logic App itself. This is done in the azure portal itself. 
 The trigger step of the Logic App should be a 'When a rule fired' from Azure IoT Central. In the configuration screen of this trigger, you create the link with your IoTCentral Application and telemetry rule. The Logic App will now also show up in the telemetry rule.
 
 ![](LogicApp_fired.PNG "Logic App Trigger")
@@ -44,11 +46,12 @@ To install the gateway, see [Connect to on-premises data sources from Azure Logi
 Since the RFC gives the alertId as output, we can send this info back to the IoT Device. Here we first need to convert the output of the 'Send Message to SAP' step into a json document and parse this json. 
 First we convert the xml output to json. This can be done in a Compose action of the Data Operations section. Use the following code snippet in the input.
 
-	`json(xml(body('Send_message_to_SAP')))`
+```json(xml(body('Send_message_to_SAP')))```
 
 The next step is to parse the JSON. Use a 'Parse JSON' action from the Data Operations section.
 
 You use the following template :
+
 ```
 {
     "properties": {
