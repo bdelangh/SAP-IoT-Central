@@ -3,9 +3,9 @@
 This document describes how you can connect Azure IoT Central with an SAP system using an Azure Logic App and the SAP Adapter.
 
 The scenario looks as follows :
-1. IoT Device sends temperature data to IoT Central. As IoT Device I used an 
+1. IoT Device sends temperature data to IoT Central.
 2. IoT Central monitors the temperature via a Rule.
-3. If the rule is triggered, eg. max Temperature > 20°C then a Logic App is triggered
+3. If the rule is triggered, eg. max Temperature > 20°C then a Logic App is started.
 4. The Logic App uses the SAP Adapter to call a RFC which create an alert.
 5. For fun the logic app sends a message to the IoT device containing the alert nr.
 
@@ -49,8 +49,8 @@ First we convert the xml output to json. This can be done in a Compose action of
 The next step is to parse the JSON. Use a 'Parse JSON' action from the Data Operations section.
 
 You use the following template :
-
-`{
+```
+{
     "properties": {
         "Z_IOTALERT_CREATE_PRIOResponse": {
             "properties": {
@@ -65,7 +65,8 @@ You use the following template :
         }
     },
     "type": "object"
-}`
+}
+```
 
 This template can also be found on [AlertIdTemplate.json](https://github.com/bdelangh/SAP-IoT-Cental/blob/master/AlertIdTemplate.json).
 
