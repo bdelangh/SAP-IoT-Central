@@ -7,7 +7,7 @@ The scenario looks as follows :
 2. IoT Central monitors the temperature via a Rule.
 3. If the rule is triggered, eg. max Temperature > 20°C then a Logic App is started.
 4. The Logic App uses the SAP Adapter to call a RFC which creates an alert in the SAP System.
-5. For fun the logic app sends a message to the IoT device containing the alert nr.
+5. For fun the logic app sends a message to the IoT device containing the alert number.
 
 As IoT device I used the MXChip from the Microsoft Azure IoT Starter kit. 
 For generic info on IoT Central, see [Azure IoT Central](https://azure.microsoft.com/en-us/services/iot-central/).
