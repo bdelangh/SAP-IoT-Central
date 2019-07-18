@@ -19,26 +19,26 @@ To connect the IoT Device to your newly created IoT Central, please follow [Conn
 
 Verify if the measurements are coming in and if you can use the echo command. This command will be used by the Logic App to display the AlertId.
 
-Now it's time to setup the Telemetry Rule. This is done in the Rules section of the Device Template of the MXChip (MXChipTemplate). You can configure a telemetry rule using a condition like max(temperature) > 20°C (or other suitable value :).
+Now it's time to setup the Telemetry Rule. This is done in the Rules section of the Device Template of the MXChip (MXChipTemplate). You can configure a telemetry rule using a condition like max(temperature) > 20°C (or other suitable value  :wink:).
 
-![](telemetryRule.PNG "Telemetry Rule")
+<img src="telemetryRule.PNG" height="500">
 
 You then need to create the Logic App itself. This is done in the azure portal itself. 
 The trigger step of the Logic App should be a 'When a rule fired' from Azure IoT Central. In the configuration screen of this trigger, you create the link with your IoTCentral Application and telemetry rule. The Logic App will now also show up in the telemetry rule.
 
-![](LogicApp_fired.PNG "Logic App Trigger")
+<img src="LogicApp_fired.PNG" width="400">
 
 The output of the trigger contains info like deviceId, telemetry data, rule, ... .
 
-![](triggerData.PNG "Trigger Data")
+<img src="triggerData.PNG" width="220">
 
 This info can be used to fill the xml string needed by the SAP RFC Adapter. 
 
-![](composeXml.PNG "Compose XML for RFC Adapter")
+<img src="composeXml.PNG" width="380">
 
 The SAP Adapter is used to call the Z_IOTALERT_CREATE_PRIO RFC. The ABAP code for this function module can be found in [sap_iot_abap](https://github.com/bdelangh/sap_iot_abap). You can use ABAPGit to retrieve the code into your test system.
 
-![](RFCAdapter.PNG "SAP RFC Adapter")
+<img src="RFCAdapter.PNG" width="375">
 
 Note: Before you can use the SAP adapter, you need to install the LogicApp 'on-premises' data gateway. See [Connect to SAP systems from Azure Logic Apps](https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-using-sap-connector).
 To install the gateway, see [Connect to on-premises data sources from Azure Logic Apps](https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-gateway-connection). You'll also need the [SAP .NET Connector (NCo) library](https://support.sap.com/en/product/connectors/msnet.html). Since my SAP system is running on Azure I installed the Gateway on a seperate vm.
@@ -77,7 +77,7 @@ To send a message to the IoT Device you'll need the action 'Run a command' of th
 You'll need the deviceId and the alertid retrieved from the previous step.
 Here you can use the echo command to display the value on the screen of the mxChip.
 
-![](echoCommand.PNG "Echo Command")
+<img src="echoCommand.PNG" width="380">
 
 The setup is complete now. Have fun testing!
 
