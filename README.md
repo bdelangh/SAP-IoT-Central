@@ -4,9 +4,9 @@ This document describes how you can connect Azure IoT Central with an SAP system
 
 The scenario looks as follows :
 1. IoT Device sends temperature data to IoT Central.
-2. IoT Central monitors the temperature via a Rule.
-3. If the rule is triggered, eg. max Temperature > 20°C then a Logic App is started.
-4. The Logic App uses the SAP Adapter to call a RFC which creates an alert in the SAP System.
+2. IoT Central monitors the temperature via a rule.
+3. If the rule is triggered, eg. max temperature > 20°C then a Logic App is started.
+4. The Logic App uses the SAP Adapter to call a RFC which creates an alert in the SAP system.
 5. For fun the logic app sends a message to the IoT device containing the alert number.
 
 As IoT device I used the MXChip from the Microsoft Azure IoT Starter kit. 
