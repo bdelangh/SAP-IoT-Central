@@ -23,7 +23,7 @@ Now it's time to setup the Telemetry Rule. This is done in the Rules section of 
 
 <img src="telemetryRule.PNG" height="500">
 
-You then need to create the Logic App itself. This is done in the azure portal itself. 
+You then need to create the Logic App itself. This is done in the azure portal. 
 The trigger step of the Logic App should be a 'When a rule fired' from Azure IoT Central. In the configuration screen of this trigger, you create the link with your IoTCentral Application and telemetry rule. The Logic App will now also show up in the telemetry rule.
 
 <img src="LogicApp_fired.PNG" width="400">
