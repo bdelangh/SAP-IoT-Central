@@ -50,7 +50,7 @@ First we convert the xml output to json. This can be done in a Compose action of
 
 The next step is to parse the JSON. Use a 'Parse JSON' action from the Data Operations section.
 
-You use the following template :
+For my RFC Call, I used the following template :
 
 ```
 {
