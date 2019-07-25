@@ -71,7 +71,7 @@ For my RFC Call, I used the following template :
 }
 ```
 
-This template can also be found on [AlertIdTemplate.json](https://github.com/bdelangh/SAP-IoT-Cental/blob/master/AlertIdTemplate.json).
+This template can also be found at [AlertIdTemplate.json](https://github.com/bdelangh/SAP-IoT-Cental/blob/master/AlertIdTemplate.json).
 
 To send a message to the IoT Device you'll need the action 'Run a command' of the Azure IoT Central object.
 You'll need the deviceId and the alertid retrieved from the previous step.
