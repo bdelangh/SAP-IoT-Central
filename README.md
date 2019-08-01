@@ -1,5 +1,7 @@
 # Connect Azure IoT Cental with SAP
 
+<img src="IoTCentralSAP.PNG" width="1700">
+
 This document describes how you can connect Azure IoT Central with an SAP system using an Azure Logic App and the SAP Adapter.
 
 The scenario looks as follows :
