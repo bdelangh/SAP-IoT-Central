@@ -1,4 +1,4 @@
-# Connect Azure IoT Cental with SAP
+# Connect Azure IoT Central with SAP
 
 <img src="IoTCentralSAP.PNG" width="1700">
 
