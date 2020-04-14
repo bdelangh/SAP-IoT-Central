@@ -24,7 +24,7 @@ Now it's time to setup the Alert Rule. This is done in the Device Template of th
 You then need create the logic App itself. You do this in the azure portal. 
 The trigger step of the logic App should be a 'When a rule fired' from Azure IoT Central. In the configuration of this trigger, you create the link with your IoTCentral Application and telemetry rule.
 
-![](media/logicApp_fired.PNG "Logic App Trigger")
+![](logicApp_fired.PNG "Logic App Trigger")
 
 The output of the trigger contains info like deviceId, telemetry data, rule, ... .
 
