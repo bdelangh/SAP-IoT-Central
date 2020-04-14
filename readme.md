@@ -30,7 +30,7 @@ The output of the trigger contains info like deviceId, telemetry data, rule, ...
 
 ![](media/insert triggerData.PNG "Trigger Data")
 
-This info can be used to fill the xml needed by the SAP RFC Adapter. 
+This info can be used to fill the xml needed by the SAP RFC Adapter. Please note the xml namespace in the document.
 
 ![](media/composeXml.PNG "Compose XML for RFC Adapter")
 
@@ -40,6 +40,10 @@ The SAP Adapter is used to call the Z_IOTALERT_CREATE_PRIO RFC. (The ABAP code f
 
 Note: you need to use the SAP adapter, you need to install the LogicApp 'on-premises' data gateway. See [Connect to SAP systems from Azure Logic Apps](https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-using-sap-connector).
 To install the gateway, see Connect to on-premises data sources from [Azure Logic Apps](https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-gateway-connection). You'll also need the [SAP .NET Connector (NCo) library](https://support.sap.com/en/product/connectors/msnet.html).
+
+The following picture gives an overview on the logic app flow.
+
+![](media/LogicAppOverview.PNG "Logic App Overview")
 
 Since the RFC gives the alertId as output, we can send this info back to the IoT Device. Here we first need to convert the output of the 'Send Message to SAP' step info a json document and parse this json. 
 First we need to convert the xml output to json. This can be done in a Compose action of the Data Operations section. Use the following code snippet in the input.
