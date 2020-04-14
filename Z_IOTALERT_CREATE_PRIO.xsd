@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ns3="http://Microsoft.LobServices.Sap/2007/03/Types/Rfc/" elementFormDefault="qualified" targetNamespace="http://Microsoft.LobServices.Sap/2007/03/Rfc/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation=".\Types" namespace="http://Microsoft.LobServices.Sap/2007/03/Types/Rfc/" />
+  <xs:annotation>
+    <xs:appinfo>
+      <fileNameHint xmlns="http://schemas.microsoft.com/servicemodel/adapters/metadata/xsd">Rfc</fileNameHint>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Z_IOTALERT_CREATE_PRIO">
+    <xs:annotation>
+      <xs:documentation>
+        <doc:action xmlns:doc="http://schemas.microsoft.com/servicemodel/adapters/metadata/documentation">http://Microsoft.LobServices.Sap/2007/03/Rfc/Z_IOTALERT_CREATE_PRIO</doc:action>
+        <doc:description xmlns:doc="http://schemas.microsoft.com/servicemodel/adapters/metadata/documentation">The Metadata for this RFC was generated using the .Net Connector.</doc:description>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="PRIORITY" nillable="true">
+          <xs:annotation>
+            <xs:documentation>Priority for Alert</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="2" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="SENSOR" nillable="true">
+          <xs:annotation>
+            <xs:documentation>Sensor ID</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="10" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="VALUE" nillable="true">
+          <xs:annotation>
+            <xs:documentation>Alert Value</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:decimal">
+              <xs:totalDigits value="5" />
+              <xs:fractionDigits value="2" />
+              <xs:pattern value="([\-]{0,1})(([0-9]{0,3}\.[0-9]{0,2})|([0-9]{1,3}))" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="RETURN" nillable="true" type="ns3:ArrayOfBAPIRET2">
+          <xs:annotation>
+            <xs:documentation>Return Parameter</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Z_IOTALERT_CREATE_PRIOResponse">
+    <xs:annotation>
+      <xs:documentation>
+        <doc:action xmlns:doc="http://schemas.microsoft.com/servicemodel/adapters/metadata/documentation">http://Microsoft.LobServices.Sap/2007/03/Rfc/Z_IOTALERT_CREATE_PRIO/response</doc:action>
+        <doc:description xmlns:doc="http://schemas.microsoft.com/servicemodel/adapters/metadata/documentation">The Metadata for this RFC was generated using the .Net Connector.</doc:description>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="RET_ALERTID" type="xs:int">
+          <xs:annotation>
+            <xs:documentation>AlertID</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="RETURN" nillable="true" type="ns3:ArrayOfBAPIRET2">
+          <xs:annotation>
+            <xs:documentation>Return Parameter</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Z_DAMAGEALERT_CREATE">
+    <xs:annotation>
+      <xs:documentation>
+        <doc:action xmlns:doc="http://schemas.microsoft.com/servicemodel/adapters/metadata/documentation">http://Microsoft.LobServices.Sap/2007/03/Rfc/Z_DAMAGEALERT_CREATE</doc:action>
+        <doc:description xmlns:doc="http://schemas.microsoft.com/servicemodel/adapters/metadata/documentation">The Metadata for this RFC was generated using the .Net Connector.</doc:description>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="PRIORITY" nillable="true">
+          <xs:annotation>
+            <xs:documentation>Priority fpr Alert</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="2" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="SENSOR" nillable="true">
+          <xs:annotation>
+            <xs:documentation>Sensor ID</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="10" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="VIBRATIONLEVEL" nillable="true">
+          <xs:annotation>
+            <xs:documentation>Vibration</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:decimal">
+              <xs:totalDigits value="5" />
+              <xs:fractionDigits value="2" />
+              <xs:pattern value="([\-]{0,1})(([0-9]{0,3}\.[0-9]{0,2})|([0-9]{1,3}))" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="RETURN" nillable="true" type="ns3:ArrayOfBAPIRET2">
+          <xs:annotation>
+            <xs:documentation>Return Parameter</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Z_DAMAGEALERT_CREATEResponse">
+    <xs:annotation>
+      <xs:documentation>
+        <doc:action xmlns:doc="http://schemas.microsoft.com/servicemodel/adapters/metadata/documentation">http://Microsoft.LobServices.Sap/2007/03/Rfc/Z_DAMAGEALERT_CREATE/response</doc:action>
+        <doc:description xmlns:doc="http://schemas.microsoft.com/servicemodel/adapters/metadata/documentation">The Metadata for this RFC was generated using the .Net Connector.</doc:description>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="RET_ALERTID" type="xs:int">
+          <xs:annotation>
+            <xs:documentation>AlertID</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="1" name="RETURN" nillable="true" type="ns3:ArrayOfBAPIRET2">
+          <xs:annotation>
+            <xs:documentation>Return Parameter</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
