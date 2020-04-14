@@ -26,7 +26,11 @@ Now it's time to setup the Telemetry Rule. This is done in the Rules section of 
 <img src="telemetryRule.PNG" height="500">
 
 You then need to create the Logic App itself. This is done in the azure portal. 
-The trigger step of the Logic App should be a 'When a rule fired' from Azure IoT Central. In the configuration screen of this trigger, you create the link with your IoTCentral Application and telemetry rule. The Logic App will now also show up in the telemetry rule.
+The following picture gives an overview of the Logic App which I implemented.
+
+<img src="LogicAppOverview.PNG" height="500">
+
+The trigger step of the Logic App should be a 'When a rule fired' from Azure IoT Central. After creation of the Logic App you can create the link between the Logic App and the telemetry rule in your IoTCentral Application. The Logic App will show up in the configuation screen of your telemetry rule.
 
 <img src="LogicApp_fired.PNG" width="400">
 
@@ -34,7 +38,7 @@ The output of the trigger contains info like deviceId, telemetry data, rule, ...
 
 <img src="triggerData.PNG" width="220">
 
-This info can be used to fill the xml string needed by the SAP RFC Adapter. 
+This info can be used to fill the xml string needed by the SAP RFC Adapter. Please Note the xml namespace in the xml document.
 
 <img src="composeXml.PNG" width="380">
 
